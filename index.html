@@ -5,69 +5,48 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Hajeb Riviera</title>
     <style>
-        body {
+        body, html {
             font-family: Arial, sans-serif;
             margin: 0;
             padding: 0;
-            overflow-x: hidden;
+            overflow: hidden;
             background-color: #f8f8f8;
+            height: 100%;
+            width: 100%;
         }
         .container {
             display: flex;
             flex-direction: column;
             align-items: center;
-            padding: 20px;
+            height: 100%;
+            width: 100%;
+            margin: 0;
+            padding: 0;
         }
         .image-container {
             display: flex;
             overflow-x: auto;
             width: 100%;
-            max-width: 100%;
-            border: 1px solid #ddd;
-            background-color: #fff;
+            height: 100%;
             scroll-snap-type: x mandatory;
-            margin-bottom: 20px; /* Add some space between the image and video containers */
         }
-        img {
+        .image-container img {
             flex-shrink: 0;
+            height: 100%;
             width: 100%;
-            max-width: 600px; /* Adjust this value to your preference */
             scroll-snap-align: center;
-        }
-        @media (min-width: 600px) {
-            img {
-                max-width: 500px; /* Adjust this value to your preference */
-            }
-        }
-        @media (min-width: 768px) {
-            img {
-                max-width: 600px; /* Adjust this value to your preference */
-            }
-        }
-        .video-container {
-            width: 100%;
-            max-width: 600px; /* Adjust this value to your preference */
-            overflow: hidden;
-        }
-        video {
-            width: 100%;
-            height: auto;
         }
     </style>
 </head>
 <body>
     <div class="container">
         <div class="image-container">
-            <img src="1.jpeg" alt="Menu 1">
-            <img src="2.jpeg" alt="Menu 2">
-            <img src="3.jpeg" alt="Menu 3">
-            <img src="4.jpeg" alt="Menu 4">
-            <img src="5.jpeg" alt="Menu 5">
-            <img src="6.jpeg" alt="Menu 6">
-            <img src="-1.jpeg" alt="Menu 7">
-        </div>
-        <div class="video-container">
-            <video src="hajeb_video.mp4" autoplay muted loop></video>
+            <img src="1.png" alt="Menu 1">
+            <img src="2.png" alt="Menu 2">
+            <img src="3.png" alt="Menu 3">
+            <img src="4.png" alt="Menu 4">
+            <img src="5.png" alt="Menu 5">
+            <img src="6.png" alt="Menu 6">
         </div>
     </div>
 </body>
