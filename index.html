@@ -1,53 +1,656 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="fr">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Hajeb Riviera</title>
-    <style>
-        body, html {
-            font-family: Arial, sans-serif;
-            margin: 0;
-            padding: 0;
-            overflow: hidden;
-            background-color: #f8f8f8;
-            height: 100%;
-            width: 100%;
+    <title>River Menu</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        river: {
+                            blue: '#3498db',
+                            dark: '#1a1a1a',
+                            gray: '#a0a0a0'
+                        }
+                    },
+                    animation: {
+                        'pulse-slow': 'pulse 2s infinite',
+                        'fade-in-down': 'fadeInDown 1.2s ease-out',
+                        'fade-in-up': 'fadeInUp 1.2s ease-out forwards',
+                        'fade-in-up-delay': 'fadeInUp 1.2s ease-out 0.3s forwards',
+                        'fade-in-up-delay-more': 'fadeInUp 1.2s ease-out 0.6s forwards',
+                        'card-appear': 'cardAppear 1s ease-out 0.9s forwards',
+                        'card-appear-delay': 'cardAppear 1s ease-out 1.2s forwards',
+                        'gradient-shift': 'gradientShift 10s ease infinite',
+                        'wave': 'wave 20s linear infinite',
+                        'wave-reverse': 'wave 15s linear infinite reverse',
+                        'float': 'float 6s ease-in-out infinite'
+                    },
+                    keyframes: {
+                        fadeInDown: {
+                            'from': { opacity: '0', transform: 'translateY(-30px)' },
+                            'to': { opacity: '1', transform: 'translateY(0)' }
+                        },
+                        fadeInUp: {
+                            'from': { opacity: '0', transform: 'translateY(30px)' },
+                            'to': { opacity: '1', transform: 'translateY(0)' }
+                        },
+                        cardAppear: {
+                            'from': { opacity: '0', transform: 'translateY(50px) scale(0.8)' },
+                            'to': { opacity: '1', transform: 'translateY(0) scale(1)' }
+                        },
+                        gradientShift: {
+                            '0%': { backgroundPosition: '0% 50%' },
+                            '50%': { backgroundPosition: '100% 50%' },
+                            '100%': { backgroundPosition: '0% 50%' }
+                        },
+                        wave: {
+                            '0%': { backgroundPositionX: '0' },
+                            '100%': { backgroundPositionX: '1440px' }
+                        },
+                        float: {
+                            '0%': { transform: 'translateY(0px)' },
+                            '50%': { transform: 'translateY(-10px)' },
+                            '100%': { transform: 'translateY(0px)' }
+                        }
+                    }
+                }
+            }
         }
-        .container {
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            height: 100%;
-            width: 100%;
-            margin: 0;
-            padding: 0;
-        }
-        .image-container {
-            display: flex;
-            overflow-x: auto;
-            width: 100%;
-            height: 100%;
-            scroll-snap-type: x mandatory;
-        }
-        .image-container img {
-            flex-shrink: 0;
-            height: 100%;
-            width: 100%;
-            scroll-snap-align: center;
-        }
-    </style>
+    </script>
+    <link rel="stylesheet" href="style.css">
 </head>
-<body>
-    <div class="container">
-        <div class="image-container">
-            <img src="1.png" alt="Menu 1">
-            <img src="2.png" alt="Menu 2">
-            <img src="3.png" alt="Menu 3">
-            <img src="4.png" alt="Menu 4">
-            <img src="5.png" alt="Menu 5">
-            <img src="6.png" alt="Menu 6">
+<body class="font-sans m-0 p-0 bg-gray-100 text-gray-800 overflow-x-hidden">
+    <!-- Mobile Navigation -->
+    <nav class="fixed top-0 left-0 w-full z-50">
+        <div class="flex justify-between items-center p-4">
+            <div class="text-white font-bold text-xl flex items-center">
+                <span class="text-river-blue animate-pulse-slow">R</span>
+                <span class="ml-1">Menu</span>
+            </div>
+            <button class="mobile-menu-btn z-50">
+                <span></span>
+                <span></span>
+                <span></span>
+            </button>
+        </div>
+        
+        <!-- Mobile Menu (hidden by default) -->
+        <div class="mobile-menu hidden fixed inset-0 bg-black/90 backdrop-blur-md flex flex-col justify-center items-center p-4 transform transition-all duration-300 opacity-0 scale-95">
+            <div class="text-center mb-8">
+                <h2 class="text-3xl font-bold mb-2"><span class="text-river-blue">Riviera</span> Menu</h2>
+                <p class="text-river-gray">Café & Restaurant</p>
+            </div>
+            <ul class="text-center space-y-6 mb-8">
+                <li><a href="#" class="text-white text-xl hover:text-river-blue transition-colors">Accueil</a></li>
+                <li><a href="#" class="text-white text-xl hover:text-river-blue transition-colors">Menu</a></li>
+                <li><a href="#" class="text-white text-xl hover:text-river-blue transition-colors">Réservation</a></li>
+                <li><a href="#" class="text-white text-xl hover:text-river-blue transition-colors">Contact</a></li>
+            </ul>
+            <div class="flex space-x-4">
+                <a href="#" class="w-10 h-10 rounded-full bg-river-blue/20 flex items-center justify-center text-white hover:bg-river-blue transition-colors">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor" viewBox="0 0 16 16">
+                        <path d="M16 8.049c0-4.446-3.582-8.05-8-8.05C3.58 0-.002 3.603-.002 8.05c0 4.017 2.926 7.347 6.75 7.951v-5.625h-2.03V8.05H6.75V6.275c0-2.017 1.195-3.131 3.022-3.131.876 0 1.791.157 1.791.157v1.98h-1.009c-.993 0-1.303.621-1.303 1.258v1.51h2.218l-.354 2.326H9.25V16c3.824-.604 6.75-3.934 6.75-7.951z"/>
+                    </svg>
+                </a>
+                <a href="#" class="w-10 h-10 rounded-full bg-river-blue/20 flex items-center justify-center text-white hover:bg-river-blue transition-colors">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor" viewBox="0 0 16 16">
+                        <path d="M8 0C5.829 0 5.556.01 4.703.048 3.85.088 3.269.222 2.76.42a3.917 3.917 0 0 0-1.417.923A3.927 3.927 0 0 0 .42 2.76C.222 3.268.087 3.85.048 4.7.01 5.555 0 5.827 0 8.001c0 2.172.01 2.444.048 3.297.04.852.174 1.433.372 1.942.205.526.478.972.923 1.417.444.445.89.719 1.416.923.51.198 1.09.333 1.942.372C5.555 15.99 5.827 16 8 16s2.444-.01 3.298-.048c.851-.04 1.434-.174 1.943-.372a3.916 3.916 0 0 0 1.416-.923c.445-.445.718-.891.923-1.417.197-.509.332-1.09.372-1.942C15.99 10.445 16 10.173 16 8s-.01-2.445-.048-3.299c-.04-.851-.175-1.433-.372-1.941a3.926 3.926 0 0 0-.923-1.417A3.911 3.911 0 0 0 13.24.42c-.51-.198-1.092-.333-1.943-.372C10.443.01 10.172 0 7.998 0h.003zm-.717 1.442h.718c2.136 0 2.389.007 3.232.046.78.035 1.204.166 1.486.275.373.145.64.319.92.599.28.28.453.546.598.92.11.281.24.705.275 1.485.039.843.047 1.096.047 3.231s-.008 2.389-.047 3.232c-.035.78-.166 1.203-.275 1.485a2.47 2.47 0 0 1-.599.919c-.28.28-.546.453-.92.598-.28.11-.704.24-1.485.276-.843.038-1.096.047-3.232.047s-2.39-.009-3.233-.047c-.78-.036-1.203-.166-1.485-.276a2.478 2.478 0 0 1-.92-.598 2.48 2.48 0 0 1-.6-.92c-.109-.281-.24-.705-.275-1.485-.038-.843-.046-1.096-.046-3.233 0-2.136.008-2.388.046-3.231.036-.78.166-1.204.276-1.486.145-.373.319-.64.599-.92.28-.28.546-.453.92-.598.282-.11.705-.24 1.485-.276.738-.034 1.024-.044 2.515-.045v.002zm4.988 1.328a.96.96 0 1 0 0 1.92.96.96 0 0 0 0-1.92zm-4.27 1.122a4.109 4.109 0 1 0 0 8.217 4.109 4.109 0 0 0 0-8.217zm0 1.441a2.667 2.667 0 1 1 0 5.334 2.667 2.667 0 0 1 0-5.334z"/>
+                    </svg>
+                </a>
+            </div>
+        </div>
+    </nav>
+
+    <div class="relative min-h-screen flex flex-col justify-center items-center bg-river-dark text-white text-center overflow-hidden">
+        <!-- Gradient Background -->
+        <div class="absolute inset-0 bg-gradient-hero animate-gradient-shift z-10"></div>
+        
+        <!-- Floating Elements (mobile only) -->
+        <div class="absolute inset-0 z-10 overflow-hidden">
+            <div class="absolute top-[15%] left-[10%] w-6 h-6 rounded-full bg-river-blue/30 animate-float" style="animation-delay: 0s;"></div>
+            <div class="absolute top-[25%] right-[15%] w-8 h-8 rounded-full bg-river-blue/20 animate-float" style="animation-delay: 1s;"></div>
+            <div class="absolute bottom-[35%] left-[20%] w-4 h-4 rounded-full bg-river-blue/40 animate-float" style="animation-delay: 2s;"></div>
+            <div class="absolute top-[60%] right-[10%] w-5 h-5 rounded-full bg-river-blue/30 animate-float" style="animation-delay: 1.5s;"></div>
+        </div>
+        
+        <!-- Waves -->
+        <div class="absolute bottom-0 left-0 w-full h-[100px] z-10">
+            <div class="absolute bottom-0 left-0 w-full h-[100px] bg-wave animate-wave"></div>
+            <div class="absolute bottom-0 left-0 w-full h-[100px] bg-wave animate-wave-reverse opacity-50"></div>
+        </div>
+        
+        <!-- Content -->
+        <div class="relative z-20 px-4 w-full max-w-6xl mx-auto pt-16">
+            <h1 class="text-4xl mb-2 text-white animate-fade-in-down">
+                <span class="text-river-blue font-bold animate-pulse-slow">Riviera</span> Menu
+            </h1>
+            <p class="text-lg text-river-gray mb-4 animate-fade-in-up-delay">Café & Restaurant</p>
+            
+            <!-- Mobile Category Tabs -->
+            <div class="mb-6 overflow-x-auto mobile-scroll pb-2 -mx-4 px-4">
+                <div class="flex space-x-2 min-w-max">
+                    <button class="category-pill py-2 px-6 rounded-full bg-river-blue text-white font-medium active">Tous</button>
+                    <button class="category-pill py-2 px-6 rounded-full bg-white/10 text-white font-medium">Poisson</button>
+                    <button class="category-pill py-2 px-6 rounded-full bg-white/10 text-white font-medium">Plat</button>
+                    <button class="category-pill py-2 px-6 rounded-full bg-white/10 text-white font-medium">Dessert</button>
+                    <button class="category-pill py-2 px-6 rounded-full bg-white/10 text-white font-medium">Boisson</button>
+                    <button class="category-pill py-2 px-6 rounded-full bg-white/10 text-white font-medium">Video</button>
+                </div>
+            </div>
+            
+            <!-- Menu Cards -->
+            <div class="flex flex-col gap-4 mt-4 mb-6 perspective-1000">
+                <!-- Fish Card - Mobile Only -->
+                <div class="card relative w-full h-[200px] bg-white/10 card-blur rounded-2xl overflow-hidden shadow-lg transition-all duration-500 transform-gpu opacity-0 animate-card-appear flex" data-category="poisson">
+                    <div class="card-shine"></div>
+                    <div class="h-full w-1/2 overflow-hidden">
+                        <img class="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110" 
+                             src="images/WhatsApp Image 2025-07-01 at 20.35.07.jpeg" 
+                             alt="Poisson">
+                    </div>
+                    <div class="p-3 text-left relative flex flex-col justify-center w-1/2">
+                        <div class="absolute -left-6 top-1/2 -translate-y-1/2 w-12 h-12 rounded-full bg-river-blue flex justify-center items-center text-white text-xl shadow-md">
+                            🐟
+                        </div>
+                        <h3 class="text-lg font-bold text-white pl-8 mb-1">Poisson</h3>
+                        <p class="text-xs text-river-gray pl-8">Découvrez nos délicieux plats de poissons frais préparés avec soin</p>
+                    </div>
+                </div>
+                
+                <!-- Plat Card - Mobile Only -->
+                <div class="card relative w-full h-[200px] bg-white/10 card-blur rounded-2xl overflow-hidden shadow-lg transition-all duration-500 transform-gpu opacity-0 animate-card-appear-delay flex" data-category="plat">
+                    <div class="card-shine"></div>
+                    <div class="h-full w-1/2 overflow-hidden">
+                        <img class="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110" 
+                             src="images/WhatsApp Image 2025-07-01 at 20.35.06.jpeg" 
+                             alt="Plat">
+                    </div>
+                    <div class="p-3 text-left relative flex flex-col justify-center w-1/2">
+                        <div class="absolute -left-6 top-1/2 -translate-y-1/2 w-12 h-12 rounded-full bg-river-blue flex justify-center items-center text-white text-xl shadow-md">
+                            🍽️
+                        </div>
+                        <h3 class="text-lg font-bold text-white pl-8 mb-1">Plat</h3>
+                        <p class="text-xs text-river-gray pl-8">Savourez nos spécialités préparées avec des ingrédients locaux</p>
+                    </div>
+                </div>
+                
+                <!-- Video Shorts Card - Mobile Only -->
+                <div class="card relative w-full h-[200px] bg-white/10 card-blur rounded-2xl overflow-hidden shadow-lg transition-all duration-500 transform-gpu opacity-0 animate-card-appear-delay-more flex" data-category="video">
+                    <div class="card-shine"></div>
+                    <div class="h-full w-1/2 overflow-hidden">
+                        <video class="w-full h-full object-cover" autoplay muted loop>
+                            <source src="videos/preview.mp4" type="video/mp4">
+                        </video>
+                    </div>
+                    <div class="p-3 text-left relative flex flex-col justify-center w-1/2">
+                        <div class="absolute -left-6 top-1/2 -translate-y-1/2 w-12 h-12 rounded-full bg-river-blue flex justify-center items-center text-white text-xl shadow-md">
+                            🎬
+                        </div>
+                        <h3 class="text-lg font-bold text-white pl-8 mb-1">Shorts</h3>
+                        <p class="text-xs text-river-gray pl-8">Découvrez nos vidéos courtes et vivez l'expérience River</p>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Menu Items Section -->
+            <div class="menu-items-container w-full max-w-4xl mx-auto pb-12 opacity-0 hidden transform transition-all duration-500">
+                <!-- Menu Category Title -->
+                <h2 class="text-2xl font-bold mb-6 text-white"><span id="selected-category" class="text-river-blue">Poisson</span> Menu</h2>
+                
+                <!-- Menu Items Grid -->
+                <div class="grid grid-cols-1 gap-4">
+                    <!-- Poisson Category Items -->
+                    <div class="menu-category" data-category="poisson">
+                        <div class="menu-item shimmer bg-white/10 card-blur rounded-xl p-4 flex gap-3 transition-all hover:bg-white/20">
+                            <div class="w-20 h-20 rounded-lg overflow-hidden flex-shrink-0 shadow-md">
+                                <img src="images/WhatsApp Image 2025-07-01 at 20.35.07 (1).jpeg" class="w-full h-full object-cover" alt="Margherita">
+                            </div>
+                            <div class="flex-1">
+                                <div class="flex justify-between items-center">
+                                    <h3 class="font-bold text-white">Margherita</h3>
+                                    <span class="price-tag text-river-blue font-medium px-3 py-1 rounded-full">16.50 DT</span>
+                                </div>
+                                <p class="text-sm text-river-gray mt-1">Sauce tomate, mozzarella, basilic</p>
+                            </div>
+                        </div>
+                        <div class="menu-item shimmer bg-white/10 card-blur rounded-xl p-4 flex gap-3 transition-all hover:bg-white/20 mt-4">
+                            <div class="w-20 h-20 rounded-lg overflow-hidden flex-shrink-0 shadow-md">
+                                <img src="images/WhatsApp Image 2025-07-01 at 20.35.07 (2).jpeg" class="w-full h-full object-cover" alt="Formule Express">
+                            </div>
+                            <div class="flex-1">
+                                <div class="flex justify-between items-center">
+                                    <h3 class="font-bold text-white">Formule Express</h3>
+                                    <span class="price-tag text-river-blue font-medium px-3 py-1 rounded-full">14.50 DT</span>
+                                </div>
+                                <p class="text-sm text-river-gray mt-1">Sandwich, frites, boisson</p>
+                            </div>
+                        </div>
+                        <div class="menu-item shimmer bg-white/10 card-blur rounded-xl p-4 flex gap-3 transition-all hover:bg-white/20 mt-4">
+                            <div class="w-20 h-20 rounded-lg overflow-hidden flex-shrink-0 shadow-md">
+                                <img src="images/WhatsApp Image 2025-07-01 at 20.35.09.jpeg" class="w-full h-full object-cover" alt="Formule Business">
+                            </div>
+                            <div class="flex-1">
+                                <div class="flex justify-between items-center">
+                                    <h3 class="font-bold text-white">Formule Business</h3>
+                                    <span class="price-tag text-river-blue font-medium px-3 py-1 rounded-full">19.50 DT</span>
+                                </div>
+                                <p class="text-sm text-river-gray mt-1">Plat au choix, boisson, café</p>
+                            </div>
+                        </div>
+                        <div class="menu-item shimmer bg-white/10 card-blur rounded-xl p-4 flex gap-3 transition-all hover:bg-white/20 mt-4">
+                            <div class="w-20 h-20 rounded-lg overflow-hidden flex-shrink-0 shadow-md">
+                                <img src="images/WhatsApp Image 2025-07-01 at 20.35.05.jpeg" class="w-full h-full object-cover" alt="Crémeux">
+                            </div>
+                            <div class="flex-1">
+                                <div class="flex justify-between items-center">
+                                    <h3 class="font-bold text-white">Crémeux</h3>
+                                    <span class="price-tag text-river-blue font-medium px-3 py-1 rounded-full">26.50 DT</span>
+                                </div>
+                                <p class="text-sm text-river-gray mt-1">Sauce crémeuse, fromage</p>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <!-- Plat Category Items -->
+                    <div class="menu-category hidden" data-category="plat">
+                        <div class="menu-item shimmer bg-white/10 card-blur rounded-xl p-4 flex gap-3 transition-all hover:bg-white/20">
+                            <div class="w-20 h-20 rounded-lg overflow-hidden flex-shrink-0 shadow-md">
+                                <img src="images/WhatsApp Image 2025-07-01 at 20.35.05.jpeg" class="w-full h-full object-cover" alt="Ricotta épinard">
+                            </div>
+                            <div class="flex-1">
+                                <div class="flex justify-between items-center">
+                                    <h3 class="font-bold text-white">Ricotta épinard</h3>
+                                    <span class="price-tag text-river-blue font-medium px-3 py-1 rounded-full">24.50 DT</span>
+                                </div>
+                                <p class="text-sm text-river-gray mt-1">Ricotta, épinard, sauce au fromage</p>
+                            </div>
+                        </div>
+                        <div class="menu-item shimmer bg-white/10 card-blur rounded-xl p-4 flex gap-3 transition-all hover:bg-white/20 mt-4">
+                            <div class="w-20 h-20 rounded-lg overflow-hidden flex-shrink-0 shadow-md">
+                                <img src="images/WhatsApp Image 2025-07-01 at 20.35.06 (1).jpeg" class="w-full h-full object-cover" alt="Boeuf">
+                            </div>
+                            <div class="flex-1">
+                                <div class="flex justify-between items-center">
+                                    <h3 class="font-bold text-white">Escalope grillée</h3>
+                                    <span class="price-tag text-river-blue font-medium px-3 py-1 rounded-full">23.50 DT</span>
+                                </div>
+                                <p class="text-sm text-river-gray mt-1">Escalope de poulet grillée, frites</p>
+                            </div>
+                        </div>
+                        <div class="menu-item shimmer bg-white/10 card-blur rounded-xl p-4 flex gap-3 transition-all hover:bg-white/20 mt-4">
+                            <div class="w-20 h-20 rounded-lg overflow-hidden flex-shrink-0 shadow-md">
+                                <img src="images/WhatsApp Image 2025-07-01 at 20.35.05 (1).jpeg" class="w-full h-full object-cover" alt="Salade César">
+                            </div>
+                            <div class="flex-1">
+                                <div class="flex justify-between items-center">
+                                    <h3 class="font-bold text-white">Salade César</h3>
+                                    <span class="price-tag text-river-blue font-medium px-3 py-1 rounded-full">20.50 DT</span>
+                                </div>
+                                <p class="text-sm text-river-gray mt-1">Poulet, parmesan, croûtons, sauce césar</p>
+                            </div>
+                        </div>
+                        <div class="menu-item shimmer bg-white/10 card-blur rounded-xl p-4 flex gap-3 transition-all hover:bg-white/20 mt-4">
+                            <div class="w-20 h-20 rounded-lg overflow-hidden flex-shrink-0 shadow-md">
+                                <img src="images/WhatsApp Image 2025-07-01 at 20.35.10.jpeg" class="w-full h-full object-cover" alt="Salade Burrata">
+                            </div>
+                            <div class="flex-1">
+                                <div class="flex justify-between items-center">
+                                    <h3 class="font-bold text-white">Salade Burrata</h3>
+                                    <span class="price-tag text-river-blue font-medium px-3 py-1 rounded-full">24.50 DT</span>
+                                </div>
+                                <p class="text-sm text-river-gray mt-1">Burrata, tomates, roquette</p>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <!-- Dessert Category Items -->
+                    <div class="menu-category hidden" data-category="dessert">
+                        <div class="menu-item shimmer bg-white/10 card-blur rounded-xl p-4 flex gap-3 transition-all hover:bg-white/20">
+                            <div class="w-20 h-20 rounded-lg overflow-hidden flex-shrink-0 shadow-md">
+                                <img src="images/WhatsApp Image 2025-07-01 at 20.35.05.jpeg" class="w-full h-full object-cover" alt="Chocolat">
+                            </div>
+                            <div class="flex-1">
+                                <div class="flex justify-between items-center">
+                                    <h3 class="font-bold text-white">Chocolat</h3>
+                                    <span class="price-tag text-river-blue font-medium px-3 py-1 rounded-full">12.50 DT</span>
+                                </div>
+                                <p class="text-sm text-river-gray mt-1">Gâteau au chocolat</p>
+                            </div>
+                        </div>
+                        <div class="menu-item shimmer bg-white/10 card-blur rounded-xl p-4 flex gap-3 transition-all hover:bg-white/20 mt-4">
+                            <div class="w-20 h-20 rounded-lg overflow-hidden flex-shrink-0 shadow-md">
+                                <img src="images/WhatsApp Image 2025-07-01 at 20.35.09.jpeg" class="w-full h-full object-cover" alt="Nutella-Banane">
+                            </div>
+                            <div class="flex-1">
+                                <div class="flex justify-between items-center">
+                                    <h3 class="font-bold text-white">Nutella-Banane</h3>
+                                    <span class="price-tag text-river-blue font-medium px-3 py-1 rounded-full">15.50 DT</span>
+                                </div>
+                                <p class="text-sm text-river-gray mt-1">Crêpe Nutella et banane</p>
+                            </div>
+                        </div>
+                        <div class="menu-item shimmer bg-white/10 card-blur rounded-xl p-4 flex gap-3 transition-all hover:bg-white/20 mt-4">
+                            <div class="w-20 h-20 rounded-lg overflow-hidden flex-shrink-0 shadow-md">
+                                <img src="images/WhatsApp Image 2025-07-01 at 20.35.09.jpeg" class="w-full h-full object-cover" alt="Nutella-Fruits secs">
+                            </div>
+                            <div class="flex-1">
+                                <div class="flex justify-between items-center">
+                                    <h3 class="font-bold text-white">Nutella-Fruits secs</h3>
+                                    <span class="price-tag text-river-blue font-medium px-3 py-1 rounded-full">18.50 DT</span>
+                                </div>
+                                <p class="text-sm text-river-gray mt-1">Crêpe Nutella et fruits secs</p>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <!-- Boisson Category Items -->
+                    <div class="menu-category hidden" data-category="boisson">
+                        <div class="menu-item shimmer bg-white/10 card-blur rounded-xl p-4 flex gap-3 transition-all hover:bg-white/20">
+                            <div class="w-20 h-20 rounded-lg overflow-hidden flex-shrink-0 shadow-md">
+                                <img src="images/WhatsApp Image 2025-07-01 at 20.35.05 (1).jpeg" class="w-full h-full object-cover" alt="Grand Crème">
+                            </div>
+                            <div class="flex-1">
+                                <div class="flex justify-between items-center">
+                                    <h3 class="font-bold text-white">Grand Crème</h3>
+                                    <span class="price-tag text-river-blue font-medium px-3 py-1 rounded-full">4.3 DT</span>
+                                </div>
+                                <p class="text-sm text-river-gray mt-1">Café crème</p>
+                            </div>
+                        </div>
+                        <div class="menu-item shimmer bg-white/10 card-blur rounded-xl p-4 flex gap-3 transition-all hover:bg-white/20 mt-4">
+                            <div class="w-20 h-20 rounded-lg overflow-hidden flex-shrink-0 shadow-md">
+                                <img src="images/WhatsApp Image 2025-07-01 at 20.35.10.jpeg" class="w-full h-full object-cover" alt="Cappuccino">
+                            </div>
+                            <div class="flex-1">
+                                <div class="flex justify-between items-center">
+                                    <h3 class="font-bold text-white">Cappuccino</h3>
+                                    <span class="price-tag text-river-blue font-medium px-3 py-1 rounded-full">4.3 DT</span>
+                                </div>
+                                <p class="text-sm text-river-gray mt-1">Café italien avec mousse de lait</p>
+                            </div>
+                        </div>
+                        <div class="menu-item shimmer bg-white/10 card-blur rounded-xl p-4 flex gap-3 transition-all hover:bg-white/20 mt-4">
+                            <div class="w-20 h-20 rounded-lg overflow-hidden flex-shrink-0 shadow-md">
+                                <img src="images/WhatsApp Image 2025-07-01 at 20.35.10.jpeg" class="w-full h-full object-cover" alt="Expresso">
+                            </div>
+                            <div class="flex-1">
+                                <div class="flex justify-between items-center">
+                                    <h3 class="font-bold text-white">Expresso</h3>
+                                    <span class="price-tag text-river-blue font-medium px-3 py-1 rounded-full">3.1 DT</span>
+                                </div>
+                                <p class="text-sm text-river-gray mt-1">Café court et serré</p>
+                            </div>
+                        </div>
+                        <div class="menu-item shimmer bg-white/10 card-blur rounded-xl p-4 flex gap-3 transition-all hover:bg-white/20 mt-4">
+                            <div class="w-20 h-20 rounded-lg overflow-hidden flex-shrink-0 shadow-md">
+                                <img src="images/WhatsApp Image 2025-07-01 at 20.35.10.jpeg" class="w-full h-full object-cover" alt="Café au Lait">
+                            </div>
+                            <div class="flex-1">
+                                <div class="flex justify-between items-center">
+                                    <h3 class="font-bold text-white">Café au Lait</h3>
+                                    <span class="price-tag text-river-blue font-medium px-3 py-1 rounded-full">3.1 DT</span>
+                                </div>
+                                <p class="text-sm text-river-gray mt-1">Café avec du lait chaud</p>
+                            </div>
+                        </div>
+                        <div class="menu-item shimmer bg-white/10 card-blur rounded-xl p-4 flex gap-3 transition-all hover:bg-white/20 mt-4">
+                            <div class="w-20 h-20 rounded-lg overflow-hidden flex-shrink-0 shadow-md">
+                                <img src="images/WhatsApp Image 2025-07-01 at 20.35.05 (1).jpeg" class="w-full h-full object-cover" alt="Camomille">
+                            </div>
+                            <div class="flex-1">
+                                <div class="flex justify-between items-center">
+                                    <h3 class="font-bold text-white">Camomille</h3>
+                                    <span class="price-tag text-river-blue font-medium px-3 py-1 rounded-full">3.5 DT</span>
+                                </div>
+                                <p class="text-sm text-river-gray mt-1">Infusion de camomille</p>
+                            </div>
+                        </div>
+                        <div class="menu-item shimmer bg-white/10 card-blur rounded-xl p-4 flex gap-3 transition-all hover:bg-white/20 mt-4">
+                            <div class="w-20 h-20 rounded-lg overflow-hidden flex-shrink-0 shadow-md">
+                                <img src="images/WhatsApp Image 2025-07-01 at 20.35.05 (1).jpeg" class="w-full h-full object-cover" alt="Menthe">
+                            </div>
+                            <div class="flex-1">
+                                <div class="flex justify-between items-center">
+                                    <h3 class="font-bold text-white">Menthe</h3>
+                                    <span class="price-tag text-river-blue font-medium px-3 py-1 rounded-full">3.5 DT</span>
+                                </div>
+                                <p class="text-sm text-river-gray mt-1">Infusion de menthe fraîche</p>
+                            </div>
+                        </div>
+                        <div class="menu-item shimmer bg-white/10 card-blur rounded-xl p-4 flex gap-3 transition-all hover:bg-white/20 mt-4">
+                            <div class="w-20 h-20 rounded-lg overflow-hidden flex-shrink-0 shadow-md">
+                                <img src="images/WhatsApp Image 2025-07-01 at 20.35.10.jpeg" class="w-full h-full object-cover" alt="Orange">
+                            </div>
+                            <div class="flex-1">
+                                <div class="flex justify-between items-center">
+                                    <h3 class="font-bold text-white">Orange</h3>
+                                    <span class="price-tag text-river-blue font-medium px-3 py-1 rounded-full">4.5 DT</span>
+                                </div>
+                                <p class="text-sm text-river-gray mt-1">Jus d'orange frais</p>
+                            </div>
+                        </div>
+                        <div class="menu-item shimmer bg-white/10 card-blur rounded-xl p-4 flex gap-3 transition-all hover:bg-white/20 mt-4">
+                            <div class="w-20 h-20 rounded-lg overflow-hidden flex-shrink-0 shadow-md">
+                                <img src="images/WhatsApp Image 2025-07-01 at 20.35.10.jpeg" class="w-full h-full object-cover" alt="Citronnade">
+                            </div>
+                            <div class="flex-1">
+                                <div class="flex justify-between items-center">
+                                    <h3 class="font-bold text-white">Citronnade</h3>
+                                    <span class="price-tag text-river-blue font-medium px-3 py-1 rounded-full">4.5 DT</span>
+                                </div>
+                                <p class="text-sm text-river-gray mt-1">Limonade fraîche</p>
+                            </div>
+                        </div>
+                        <div class="menu-item shimmer bg-white/10 card-blur rounded-xl p-4 flex gap-3 transition-all hover:bg-white/20 mt-4">
+                            <div class="w-20 h-20 rounded-lg overflow-hidden flex-shrink-0 shadow-md">
+                                <img src="images/WhatsApp Image 2025-07-01 at 20.35.05 (1).jpeg" class="w-full h-full object-cover" alt="Eau">
+                            </div>
+                            <div class="flex-1">
+                                <div class="flex justify-between items-center">
+                                    <h3 class="font-bold text-white">Eau</h3>
+                                    <span class="price-tag text-river-blue font-medium px-3 py-1 rounded-full">1.5 DT</span>
+                                </div>
+                                <p class="text-sm text-river-gray mt-1">Eau minérale</p>
+                            </div>
+                        </div>
+                        <div class="menu-item shimmer bg-white/10 card-blur rounded-xl p-4 flex gap-3 transition-all hover:bg-white/20 mt-4">
+                            <div class="w-20 h-20 rounded-lg overflow-hidden flex-shrink-0 shadow-md">
+                                <img src="images/WhatsApp Image 2025-07-01 at 20.35.05 (1).jpeg" class="w-full h-full object-cover" alt="Coca-Cola">
+                            </div>
+                            <div class="flex-1">
+                                <div class="flex justify-between items-center">
+                                    <h3 class="font-bold text-white">Coca-Cola</h3>
+                                    <span class="price-tag text-river-blue font-medium px-3 py-1 rounded-full">2.5 DT</span>
+                                </div>
+                                <p class="text-sm text-river-gray mt-1">Boisson gazeuse</p>
+                            </div>
+                        </div>
+                        <div class="menu-item shimmer bg-white/10 card-blur rounded-xl p-4 flex gap-3 transition-all hover:bg-white/20 mt-4">
+                            <div class="w-20 h-20 rounded-lg overflow-hidden flex-shrink-0 shadow-md">
+                                <img src="images/WhatsApp Image 2025-07-01 at 20.35.05 (1).jpeg" class="w-full h-full object-cover" alt="Sprite">
+                            </div>
+                            <div class="flex-1">
+                                <div class="flex justify-between items-center">
+                                    <h3 class="font-bold text-white">Sprite</h3>
+                                    <span class="price-tag text-river-blue font-medium px-3 py-1 rounded-full">2.5 DT</span>
+                                </div>
+                                <p class="text-sm text-river-gray mt-1">Boisson gazeuse au citron</p>
+                            </div>
+                        </div>
+                        <div class="menu-item shimmer bg-white/10 card-blur rounded-xl p-4 flex gap-3 transition-all hover:bg-white/20 mt-4">
+                            <div class="w-20 h-20 rounded-lg overflow-hidden flex-shrink-0 shadow-md">
+                                <img src="images/WhatsApp Image 2025-07-01 at 20.35.05 (1).jpeg" class="w-full h-full object-cover" alt="Fanta">
+                            </div>
+                            <div class="flex-1">
+                                <div class="flex justify-between items-center">
+                                    <h3 class="font-bold text-white">Fanta</h3>
+                                    <span class="price-tag text-river-blue font-medium px-3 py-1 rounded-full">2.5 DT</span>
+                                </div>
+                                <p class="text-sm text-river-gray mt-1">Boisson gazeuse à l'orange</p>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <!-- Video Category Items -->
+                    <div class="menu-category hidden" data-category="video">
+                        <div class="relative">
+                            <!-- Scrollable Container -->
+                            <div class="videos-scroll-container overflow-x-auto pb-4 hide-scrollbar">
+                                <div class="flex space-x-4 min-w-max px-2">
+                                    <!-- Video Item 1 -->
+                                    <div class="menu-item shimmer bg-white/10 card-blur rounded-xl overflow-hidden transition-all hover:bg-white/20 w-[280px] flex-shrink-0 relative shadow-lg">
+                                        <div class="w-full aspect-video overflow-hidden relative">
+                                            <div class="absolute inset-0 bg-gradient-to-t from-black/70 to-transparent z-10"></div>
+                                            <video class="w-full h-full object-cover" poster="images/WhatsApp Image 2025-07-01 at 20.35.07.jpeg">
+                                                <source src="videos/short1.mp4" type="video/mp4">
+                                            </video>
+                                            <button class="absolute inset-0 flex items-center justify-center z-20 play-btn">
+                                                <div class="w-14 h-14 rounded-full bg-river-blue/80 flex items-center justify-center backdrop-blur-sm transition-transform hover:scale-110">
+                                                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="currentColor" class="text-white" viewBox="0 0 16 16">
+                                                        <path d="m11.596 8.697-6.363 3.692c-.54.313-1.233-.066-1.233-.697V4.308c0-.63.692-1.01 1.233-.696l6.363 3.692a.802.802 0 0 1 0 1.393z"/>
+                                                    </svg>
+                                                </div>
+                                            </button>
+                                        </div>
+                                        <div class="p-3">
+                                            <h3 class="font-bold text-white text-lg">Présentation du Restaurant</h3>
+                                            <p class="text-sm text-river-gray mt-1">Découvrez l'ambiance unique de notre restaurant</p>
+                                            <div class="flex items-center mt-2 text-xs text-river-gray">
+                                                <span>01:25</span>
+                                                <div class="ml-auto flex items-center">
+                                                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="text-river-blue mr-1" viewBox="0 0 16 16">
+                                                        <path d="M8 15A7 7 0 1 1 8 1a7 7 0 0 1 0 14zm0 1A8 8 0 1 0 8 0a8 8 0 0 0 0 16z"/>
+                                                        <path d="M8 4a.5.5 0 0 1 .5.5v3h3a.5.5 0 0 1 0 1h-3v3a.5.5 0 0 1-1 0v-3h-3a.5.5 0 0 1 0-1h3v-3A.5.5 0 0 1 8 4z"/>
+                                                    </svg>
+                                                    Voir plus
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    
+                                    <!-- Video Item 2 -->
+                                    <div class="menu-item shimmer bg-white/10 card-blur rounded-xl overflow-hidden transition-all hover:bg-white/20 w-[280px] flex-shrink-0 relative shadow-lg">
+                                        <div class="w-full aspect-video overflow-hidden relative">
+                                            <div class="absolute inset-0 bg-gradient-to-t from-black/70 to-transparent z-10"></div>
+                                            <video class="w-full h-full object-cover" poster="images/WhatsApp Image 2025-07-01 at 20.35.06.jpeg">
+                                                <source src="videos/short1.mp4" type="video/mp4">
+                                            </video>
+                                            <button class="absolute inset-0 flex items-center justify-center z-20 play-btn">
+                                                <div class="w-14 h-14 rounded-full bg-river-blue/80 flex items-center justify-center backdrop-blur-sm transition-transform hover:scale-110">
+                                                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="currentColor" class="text-white" viewBox="0 0 16 16">
+                                                        <path d="m11.596 8.697-6.363 3.692c-.54.313-1.233-.066-1.233-.697V4.308c0-.63.692-1.01 1.233-.696l6.363 3.692a.802.802 0 0 1 0 1.393z"/>
+                                                    </svg>
+                                                </div>
+                                            </button>
+                                        </div>
+                                        <div class="p-3">
+                                            <h3 class="font-bold text-white text-lg">Nos spécialités</h3>
+                                            <p class="text-sm text-river-gray mt-1">Découvrez nos plats signature</p>
+                                            <div class="flex items-center mt-2 text-xs text-river-gray">
+                                                <span>00:45</span>
+                                                <div class="ml-auto flex items-center">
+                                                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="text-river-blue mr-1" viewBox="0 0 16 16">
+                                                        <path d="M8 15A7 7 0 1 1 8 1a7 7 0 0 1 0 14zm0 1A8 8 0 1 0 8 0a8 8 0 0 0 0 16z"/>
+                                                        <path d="M8 4a.5.5 0 0 1 .5.5v3h3a.5.5 0 0 1 0 1h-3v3a.5.5 0 0 1-1 0v-3h-3a.5.5 0 0 1 0-1h3v-3A.5.5 0 0 1 8 4z"/>
+                                                    </svg>
+                                                    Voir plus
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    
+                                    <!-- Video Item 3 -->
+                                    <div class="menu-item shimmer bg-white/10 card-blur rounded-xl overflow-hidden transition-all hover:bg-white/20 w-[280px] flex-shrink-0 relative shadow-lg">
+                                        <div class="w-full aspect-video overflow-hidden relative">
+                                            <div class="absolute inset-0 bg-gradient-to-t from-black/70 to-transparent z-10"></div>
+                                            <video class="w-full h-full object-cover" poster="images/WhatsApp Image 2025-07-01 at 20.35.09.jpeg">
+                                                <source src="videos/short1.mp4" type="video/mp4">
+                                            </video>
+                                            <div class="absolute top-2 right-2 bg-river-blue text-white text-xs px-2 py-1 rounded-full z-20">Nouveau</div>
+                                            <button class="absolute inset-0 flex items-center justify-center z-20 play-btn">
+                                                <div class="w-14 h-14 rounded-full bg-river-blue/80 flex items-center justify-center backdrop-blur-sm transition-transform hover:scale-110">
+                                                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="currentColor" class="text-white" viewBox="0 0 16 16">
+                                                        <path d="m11.596 8.697-6.363 3.692c-.54.313-1.233-.066-1.233-.697V4.308c0-.63.692-1.01 1.233-.696l6.363 3.692a.802.802 0 0 1 0 1.393z"/>
+                                                    </svg>
+                                                </div>
+                                            </button>
+                                        </div>
+                                        <div class="p-3">
+                                            <h3 class="font-bold text-white text-lg">Ambiance soirée</h3>
+                                            <p class="text-sm text-river-gray mt-1">Vivez l'expérience River de nuit</p>
+                                            <div class="flex items-center mt-2 text-xs text-river-gray">
+                                                <span>01:10</span>
+                                                <div class="ml-auto flex items-center">
+                                                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="text-river-blue mr-1" viewBox="0 0 16 16">
+                                                        <path d="M8 15A7 7 0 1 1 8 1a7 7 0 0 1 0 14zm0 1A8 8 0 1 0 8 0a8 8 0 0 0 0 16z"/>
+                                                        <path d="M8 4a.5.5 0 0 1 .5.5v3h3a.5.5 0 0 1 0 1h-3v3a.5.5 0 0 1-1 0v-3h-3a.5.5 0 0 1 0-1h3v-3A.5.5 0 0 1 8 4z"/>
+                                                    </svg>
+                                                    Voir plus
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            
+                            <!-- Video Category Indicator -->
+                            <div class="flex justify-center mt-4 space-x-1">
+                                <span class="w-2 h-2 rounded-full bg-river-blue"></span>
+                                <span class="w-2 h-2 rounded-full bg-white/30"></span>
+                                <span class="w-2 h-2 rounded-full bg-white/30"></span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
         </div>
     </div>
+    
+    <script src="script.js"></script>
+    <script>
+    // Video player functionality
+    document.addEventListener('DOMContentLoaded', function() {
+        const playButtons = document.querySelectorAll('.play-btn');
+        
+        playButtons.forEach(button => {
+            button.addEventListener('click', function() {
+                const videoContainer = this.closest('.menu-item');
+                const video = videoContainer.querySelector('video');
+                
+                if (video.paused) {
+                    // Pause all other videos first
+                    document.querySelectorAll('video').forEach(v => {
+                        if (!v.paused && v !== video) {
+                            v.pause();
+                            const playBtn = v.closest('.menu-item').querySelector('.play-btn');
+                            playBtn.style.opacity = '1';
+                        }
+                    });
+                    
+                    // Play this video
+                    video.play();
+                    this.style.opacity = '0';
+                    
+                    // Add fullscreen class to video container
+                    videoContainer.classList.add('video-playing');
+                    
+                    // Listen for video end
+                    video.addEventListener('ended', function() {
+                        button.style.opacity = '1';
+                        videoContainer.classList.remove('video-playing');
+                    }, { once: true });
+                } else {
+                    video.pause();
+                    this.style.opacity = '1';
+                    videoContainer.classList.remove('video-playing');
+                }
+            });
+        });
+    });
+    </script>
 </body>
-</html>
+</html> 
